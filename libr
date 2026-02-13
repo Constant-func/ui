@@ -1,7 +1,7 @@
 local RageLib = {}
 RageLib.__index = RageLib
 
--- RED EVIL COLORS
+-- COLORS
 local COLORS = {
     Primary = Color3.fromRGB(20, 20, 20),
     Secondary = Color3.fromRGB(28, 28, 28),
@@ -14,17 +14,14 @@ local COLORS = {
 function RageLib.CreateWindow(title, logoId)
     local self = setmetatable({}, RageLib)
     
-    -- GET CORRECT PARENT
     local Player = game.Players.LocalPlayer
     local Parent = Player:WaitForChild("PlayerGui")
     
-    -- MAIN GUI
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = "RageGUI"
     ScreenGui.ResetOnSpawn = false
     ScreenGui.Parent = Parent
     
-    -- SHADOW
     local shadow = Instance.new("ImageLabel")
     shadow.Name = "shadow"
     shadow.Parent = ScreenGui
@@ -36,7 +33,6 @@ function RageLib.CreateWindow(title, logoId)
     shadow.ImageTransparency = 0.2
     shadow.ZIndex = 0
     
-    -- MAIN FRAME
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
     MainFrame.Parent = shadow
@@ -50,7 +46,6 @@ function RageLib.CreateWindow(title, logoId)
     MainCorner.CornerRadius = UDim.new(0, 5)
     MainCorner.Parent = MainFrame
     
-    -- SIDEBAR
     local sideHeading = Instance.new("Frame")
     sideHeading.Name = "sideHeading"
     sideHeading.Parent = MainFrame
@@ -63,7 +58,6 @@ function RageLib.CreateWindow(title, logoId)
     SideCorner.CornerRadius = UDim.new(0, 5)
     SideCorner.Parent = sideHeading
     
-    -- SIDEBAR COVER
     local sideCover = Instance.new("Frame")
     sideCover.Name = "sideCover"
     sideCover.Parent = sideHeading
@@ -72,7 +66,6 @@ function RageLib.CreateWindow(title, logoId)
     sideCover.Position = UDim2.new(0.91, 0, 0, 0)
     sideCover.Size = UDim2.new(0, 14, 0, 452)
     
-    -- LOGO
     local hubLogo = Instance.new("Frame")
     hubLogo.Name = "hubLogo"
     hubLogo.Parent = sideHeading
@@ -86,7 +79,6 @@ function RageLib.CreateWindow(title, logoId)
     LogoCorner.CornerRadius = UDim.new(0, 999)
     LogoCorner.Parent = hubLogo
     
-    -- TITLE
     local hubName = Instance.new("TextLabel")
     hubName.Name = "hubName"
     hubName.Parent = sideHeading
@@ -100,7 +92,6 @@ function RageLib.CreateWindow(title, logoId)
     hubName.TextXAlignment = Enum.TextXAlignment.Left
     hubName.ZIndex = 2
     
-    -- USERNAME
     local usename = Instance.new("TextLabel")
     usename.Name = "usename"
     usename.Parent = sideHeading
@@ -114,7 +105,6 @@ function RageLib.CreateWindow(title, logoId)
     usename.TextXAlignment = Enum.TextXAlignment.Left
     usename.ZIndex = 2
     
-    -- TAB FRAME
     local tabFrame = Instance.new("ScrollingFrame")
     tabFrame.Name = "tabFrame"
     tabFrame.Parent = sideHeading
@@ -130,7 +120,6 @@ function RageLib.CreateWindow(title, logoId)
     TabList.SortOrder = Enum.SortOrder.LayoutOrder
     TabList.Padding = UDim.new(0, 5)
     
-    -- WAVE
     local wave = Instance.new("ImageLabel")
     wave.Name = "wave"
     wave.Parent = MainFrame
@@ -147,7 +136,6 @@ function RageLib.CreateWindow(title, logoId)
     WaveCorner.CornerRadius = UDim.new(0, 3)
     WaveCorner.Parent = wave
     
-    -- CONTENT FRAME
     local framesAll = Instance.new("Frame")
     framesAll.Name = "framesAll"
     framesAll.Parent = MainFrame
@@ -157,12 +145,10 @@ function RageLib.CreateWindow(title, logoId)
     framesAll.Size = UDim2.new(0, 381, 0, 431)
     framesAll.ZIndex = 2
     
-    -- PAGE FOLDER
     local pageFolder = Instance.new("Folder")
     pageFolder.Name = "pageFolder"
     pageFolder.Parent = framesAll
     
-    -- KEYBIND
     local key1 = Instance.new("TextButton")
     key1.Name = "key1"
     key1.Parent = sideHeading
@@ -199,7 +185,6 @@ function RageLib.CreateWindow(title, logoId)
         end
     end)
     
-    -- CLOSE BUTTON
     local closeBtn = Instance.new("TextLabel")
     closeBtn.Name = "close"
     closeBtn.Parent = sideHeading
@@ -212,7 +197,6 @@ function RageLib.CreateWindow(title, logoId)
     closeBtn.TextSize = 13
     closeBtn.ZIndex = 2
     
-    -- DRAG
     local UserInputService = game:GetService("UserInputService")
     local Draggable = false
     local DragMousePosition
@@ -349,7 +333,7 @@ function RageLib:Tab(tabText, tabId)
         local sectionFrame = Instance.new("Frame")
         sectionFrame.Name = "sectionFrame"
         sectionFrame.Parent = newPage
-        sectionFrame.BackgroundColor3 = COLORS.Secondary
+        sectionFrame.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
         sectionFrame.Size = UDim2.new(1, 0, 0, 36)
         sectionFrame.BorderSizePixel = 0
         sectionFrame.ClipsDescendants = true
@@ -580,7 +564,7 @@ function RageLib:Tab(tabText, tabId)
             end)
             
             game:GetService("UserInputService").InputChanged:Connect(function(input)
-                if Dragging and input.UserInputType == Enum.UserInputType.Mouse then
+                if Dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
                     local sliderSize = sliderBg.AbsoluteSize.X
                     local sliderPos = sliderBg.AbsolutePosition.X
                     local mousePos = input.Position.X
